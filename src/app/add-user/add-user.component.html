@@ -1,0 +1,30 @@
+<div>
+    <table>
+      <tr>
+          <td for="name">Name: </td>
+          <td> <input id="new-hero" #heroName></td>
+      </tr>
+      <tr>
+          <td for="name">Country:</td>
+          <td><input id="new-hero" #heroCountry></td>
+      </tr>
+      <tr>
+        <td for="name">Age: </td>
+        <td><input pattern="^[0-9]+$" id="new-hero" #heroAge></td>
+      </tr>
+      <tr>
+        <td><button (click)="add(heroName.value, heroCountry.value, heroAge.value); heroName.value=''; heroAge.value=''; heroCountry.value=''">
+          Add user
+        </button></td>
+        <td><button (click)="goBack()">go back</button></td>
+      </tr>
+    </table>
+    <div *ngIf="!showMainContent" id="age">
+      Age entered incorrectly
+    </div>
+      
+    <div *ngIf="!incorrect" id="age">
+      Fill in all the data
+    </div>
+    
+    </div>

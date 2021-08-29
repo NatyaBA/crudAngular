@@ -1,0 +1,25 @@
+<div *ngIf="hero">
+    <h2>{{hero.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{hero.id}}</div>
+    <div>
+    <table>
+        <tr>
+            <td for="name">Name: </td>
+            <td><input id="name" [(ngModel)]="hero.name" placeholder="name"></td>
+        </tr>
+        <tr>
+            <td for="country">Country:</td>
+            <td>  <input id="country" [(ngModel)]="hero.country" placeholder="country"></td>
+        </tr>
+        <tr>
+            <td for="age">Age: </td>
+            <td><input id="age" #heroAge pattern="^[0-9]+$" [(ngModel)]="hero.age" placeholder="age"></td>
+        </tr>
+    </table>
+    <button mat-button (click)="save(heroAge.value)">save</button>
+    <button (click)="goBack()">go back</button>
+    <div *ngIf="!showMainContent" id="ages">
+        некорректно введен возраст
+    </div>
+  </div>
+</div>

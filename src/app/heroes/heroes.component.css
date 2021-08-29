@@ -1,0 +1,126 @@
+* {
+  margin: 0 auto;
+}
+table {
+  width: 70%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+.text {
+  display: none;
+  position: absolute;
+  margin-top: -40px;
+  color: crimson;
+  margin-left: 70px;
+}
+.modal_content {
+  position: absolute;
+  justify-content: center;
+}
+
+#age {
+  color: red;
+  font-size: 20px;
+  border: solid;
+  padding: 10px;
+  width: 240px;
+  justify-content: center;
+}
+
+.delete button,
+.edit button {
+  width: 70px;
+  height: 30px;
+  font-size: 20px;
+  background-color: #ffe293;
+  border: none;
+  margin: 15px;
+  color: #039;
+  border-radius: 5px 5px 5px 5px;;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.delete button,
+.edit button {
+  width: 50px;
+  height: 25px;
+  font-size: 15px;
+}
+
+.plus {
+  font-size: 30px;
+  color: #039;
+  margin-left: 16%; 
+  border: none;
+  background-color: rgb(255, 255, 255);
+}
+
+.table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 14px;
+  background: white;
+  max-width: 70%;
+  width: 70%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th {
+  font-weight: normal;
+  color: #039;
+  border-bottom: 2px solid #6678b1;
+  padding: 10px 8px;
+}
+
+td {
+  color: #669;
+  padding: 9px 8px;
+  transition: .3s linear;
+}
+
+.modalPlus {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 1000;
+}
+
+.modalPlus .modal_content {
+  background-color: #f7e4b1;
+  margin: 15% auto;
+  padding: 20px;
+  margin-top: 200px;
+  border: 1px solid #888;
+  width: 50%;
+  z-index: 999;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 25px;
+  height: 370px;
+  border-radius: 25px 25px 25px 25px;
+}
+
+.edit,
+.delete {
+  width: 50px;
+}
+
+.headButton {
+    margin: 0px 10% 40px;
+    display: flex;
+}
+
+.headButton button {
+  margin: 50px 40px auto;
+  width: 100px;
+  height: 40px;
+  background-color: #ffe293;
+  border: none;
+  border-radius: 5px;
+}

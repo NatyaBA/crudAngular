@@ -1,0 +1,17 @@
+<h2>{{hero.name | uppercase}} Details</h2>
+<div><span>id: </span>{{hero.id}}</div>
+<div>
+<table>
+    <tr>
+        <td for="name">Name: </td>
+        <td> <input id="name" [(ngModel)]="hero.name" placeholder="name"></td>
+    </tr>
+    <tr>
+        <td for="name">Age: </td>
+        <td><input id="age" [(ngModel)]="hero.age" placeholder="age"></td>
+    </tr>
+    <tr>
+        <td for="name">Country:</td>
+        <td>  <input id="country" [(ngModel)]="hero.country" placeholder="country"></td>
+    </tr>
+</table>

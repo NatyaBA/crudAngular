@@ -1,0 +1,48 @@
+* {
+  margin: 0 auto;
+}
+
+.text {
+  display: none;
+  position: absolute;
+  margin-top: -40px;
+  color: crimson;
+  margin-left: 70px;
+}
+.modal_content {
+  position: absolute;
+  justify-content: center;
+}
+
+#age {
+  color: red;
+  font-size: 20px;
+  border: solid;
+  padding: 10px;
+  width: 240px;
+  justify-content: center;
+}
+
+button {
+    background-color: #ffe293;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    font-size: 15px;
+    width: 80px;
+}
+
+th {
+  font-weight: normal;
+  color: #039;
+  border-bottom: 2px solid #6678b1;
+  padding: 10px 8px;
+}
+
+td {
+  color: #669;
+  padding: 9px 8px;
+  transition: .3s linear;
+}
+
+
