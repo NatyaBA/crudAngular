@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';  
 
 @Component({
   selector: 'app-add-user',
@@ -14,11 +13,10 @@ import { CommonModule } from '@angular/common';
 
 export class AddUserComponent implements OnInit {
   heroes: Hero[] = [];
-  
-  hero: Hero | undefined;
   showMainContent: Boolean = true;
   incorrect: Boolean = true;
-  deleted: Boolean = true;
+  hero: Hero | undefined;
+ 
   constructor(  
     private heroService: HeroService,
     private location: Location) { }
@@ -36,21 +34,23 @@ export class AddUserComponent implements OnInit {
     name = name.trim();
     age = age.trim();
     country = country.trim();
-  
+
     if (!name || !age || !country) { 
       this.incorrect = false;
+      this.showMainContent = true;
       return; 
     }
-      else 
-        this.incorrect = true;
-    
+    else 
+    this.incorrect = true;
+  
+
     for (let i = 1; i < 101; i++)
       if (age == String(i)) {
         this.showMainContent = true;
         this.heroService.addHero({ country, age, name }  as Hero)
         .subscribe(hero => {
         this.heroes.push(hero);
-        this.goBack();
+        this.back();
         });
         break;
       }
@@ -58,9 +58,17 @@ export class AddUserComponent implements OnInit {
         this.showMainContent = false;
       }
     }
-    goBack(): void {
+
+    back(): void {
       this.location.back();
     }
-  
+
+    goBack(): void {
+      if (confirm('Are you sure you want to leave page without saving?')) {
+        this.location.back();
+      }
+      else return;
+    }
+
     }
   

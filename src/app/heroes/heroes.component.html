@@ -1,6 +1,30 @@
+<div *ngIf="res | async as msg; else loading">
+  {{msg}}
+</div>
+<ng-template #loading>
+  <mat-progress-bar 
+    mode="determinate" 
+    [value]="determinateCnt" 
+    (animationEnd)="progressInLoading()">
+  </mat-progress-bar>
+</ng-template>
+
+<div id="search-component">
+  <label for="search-box">Hero Search</label>
+  <div class="search"> 
+    <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+  </div>
+    <ul class="search-result">
+      <li *ngFor="let hero of heroes$ | async" >
+        <a routerLink="/detail/{{hero.id}}">
+          {{hero.name}}
+        </a>
+      </li>
+    </ul>
+</div>
+
 <div class="headButton" >
   <button routerLink="/addUser">Add user</button>
-  <button routerLink="/search">Find by User Name</button>
 </div>
 
 <table  matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -34,4 +58,3 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-

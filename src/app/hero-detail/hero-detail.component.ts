@@ -13,7 +13,7 @@ import { HeroService } from '../hero.service';
 export class HeroDetailComponent implements OnInit {
   hero: Hero | undefined;
   showMainContent: Boolean = true;
-
+  incorrect: Boolean = true;
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
@@ -31,17 +31,35 @@ export class HeroDetailComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back();
+    if (confirm('Are you sure you want to leave page without saving?')) {
+      this.location.back();
+    }
+    else return;
   }
 
-  save(age: string): void {
+  back(): void {
+      this.location.back();
+  }
+
+  save (name: string, country: string, age: string): void {
+    name = name.trim();
     age = age.trim();
+    country = country.trim();
+
+    if (!name || !age || !country) { 
+      this.incorrect = false;
+      this.showMainContent = true;
+      return; 
+    }
+    else
+    this.incorrect = true;
+
     for (let i=1; i < 101; i++)
       if (age == String(i)) {
         this.showMainContent = true;
           if (this.hero) {
             this.heroService.updateHero(this.hero)
-            .subscribe(() => this.goBack());
+            .subscribe(() => this.back());
           }
           break;
       }

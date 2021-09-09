@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { HeroSearchComponent } from './hero-search/hero-search.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+import { AddUserComponent } from './add-user/add-user.component';
 import { HeroesComponent } from './heroes/heroes.component';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -117,8 +118,9 @@ import { BrowserModule } from '@angular/platform-browser';
         AppComponent,
         HeroesComponent,
         HeroDetailComponent,
-        HeroSearchComponent,
+        AddUserComponent
     ],
+
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }
