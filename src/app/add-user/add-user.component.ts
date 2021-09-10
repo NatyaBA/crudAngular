@@ -16,13 +16,14 @@ export class AddUserComponent implements OnInit {
   showMainContent: Boolean = true;
   incorrect: Boolean = true;
   hero: Hero | undefined;
- 
+
   constructor(  
     private heroService: HeroService,
     private location: Location) { }
 
   ngOnInit() {
     this.getHeroes();
+    
   }
 
   getHeroes(): void {
@@ -34,7 +35,16 @@ export class AddUserComponent implements OnInit {
     name = name.trim();
     age = age.trim();
     country = country.trim();
+    
+    console.log('Excecute filter');
+    
 
+    this.heroes = this.heroes.filter((hero: Hero) => hero.name === name);
+    this.heroes = this.heroes;
+    console.log(this.heroes);
+// this.heroes = this.heroes.filter(hero => 
+ // hero.name === name);
+       
     if (!name || !age || !country) { 
       this.incorrect = false;
       this.showMainContent = true;
@@ -43,7 +53,6 @@ export class AddUserComponent implements OnInit {
     else 
     this.incorrect = true;
   
-
     for (let i = 1; i < 101; i++)
       if (age == String(i)) {
         this.showMainContent = true;
