@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-
 import { Hero } from '../hero';
+import { ConfirmationDialog } from './confirmation-dialog.component';
 import { HeroService } from '../hero.service';
+import { Observable, Subject, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators'
+import { delay } from 'rxjs/operators';
+import {  MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-user',
@@ -10,21 +14,42 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./add-user.component.css']
 })
 
-
 export class AddUserComponent implements OnInit {
   heroes: Hero[] = [];
+  heroes$!: Observable<Hero[]>;
   showMainContent: Boolean = true;
   incorrect: Boolean = true;
   hero: Hero | undefined;
-
+  userName: Boolean = true;
+  
+  private searchTerms = new Subject<string>();
   constructor(  
     private heroService: HeroService,
-    private location: Location) { }
+    private location: Location,
+    private dialog: MatDialog,) { }
 
   ngOnInit() {
-    this.getHeroes();
-    
+    this.getHeroes(); 
+    this.startCounter();  
+    this.heroes$ = this.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((term: string) => this.heroService.searchHeroesName(term)),
+    );
   }
+
+  res: Observable<String>;
+  determinateCnt = 0;
+  startCounter() {
+    setInterval(() => {
+      this.determinateCnt += 60;
+    }, 100);
+    this.res = of("  ").pipe (delay(2100));
+  }
+    
+  progressInLoading() {
+    console.log('Determinate mode: '+ this.determinateCnt + '% completed...');
+  }  
 
   getHeroes(): void {
     this.heroService.getHeroes()
@@ -35,37 +60,40 @@ export class AddUserComponent implements OnInit {
     name = name.trim();
     age = age.trim();
     country = country.trim();
-    
-    console.log('Excecute filter');
-    
 
-    this.heroes = this.heroes.filter((hero: Hero) => hero.name === name);
-    this.heroes = this.heroes;
-    console.log(this.heroes);
-// this.heroes = this.heroes.filter(hero => 
- // hero.name === name);
-       
     if (!name || !age || !country) { 
       this.incorrect = false;
       this.showMainContent = true;
+      this.userName = true;
       return; 
     }
     else 
     this.incorrect = true;
-  
-    for (let i = 1; i < 101; i++)
-      if (age == String(i)) {
-        this.showMainContent = true;
-        this.heroService.addHero({ country, age, name }  as Hero)
-        .subscribe(hero => {
-        this.heroes.push(hero);
-        this.back();
+        this.heroService.getHeroes().subscribe( heroes => {
+          var nums: string[]= new Array(4);
+          
+          for(let i=0; i<heroes.length; i++) {
+            nums = Object.values(heroes[i])
+            if (nums[1] == name || nums[2] == name) {
+              this.userName = false;
+             return          
+            }
+          }
+          for (let i = 1; i < 101; i++)
+          if (age == String(i)  && (nums[1] !== name || nums[2] !== name)) {
+            this.showMainContent = true;
+            this.userName = true;
+            this.heroService.addHero({ country, age, name }  as Hero)
+            .subscribe(hero => {
+            this.heroes.push(hero);
+            this.back();
+          });
+          break;
+        }
+        else {
+          this.showMainContent = false;
+        }
         });
-        break;
-      }
-      else {
-        this.showMainContent = false;
-      }
     }
 
     back(): void {
@@ -73,11 +101,22 @@ export class AddUserComponent implements OnInit {
     }
 
     goBack(): void {
-      if (confirm('Are you sure you want to leave page without saving?')) {
-        this.location.back();
-      }
-      else return;
+      const dialogRef = this.dialog.open(ConfirmationDialog,{
+        data:{
+          message: 'Are you sure want to delete?',
+          buttonText: {
+            cancel: 'Cancle',
+            ok: 'Go back'
+          }
+        }
+      });
+      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          const a = document.createElement('a');
+          a.click();
+          a.remove();
+          this.location.back();
+        }
+      });
     }
-
-    }
-  
+}  

@@ -3,4 +3,4 @@ export interface Hero {
     name: string;
     age: string;
     country: string;
-  }
+}

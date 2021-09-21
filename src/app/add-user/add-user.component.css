@@ -9,6 +9,7 @@
   color: crimson;
   margin-left: 70px;
 }
+
 .modal_content {
   position: absolute;
   justify-content: center;
@@ -24,12 +25,12 @@
 }
 
 button {
-    background-color: #ffe293;
-    border: none;
-    border-radius: 5px;
-    height: 30px;
-    font-size: 15px;
-    width: 80px;
+  background-color: #ffe293;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  font-size: 15px;
+  width: 80px;
 }
 
 th {
@@ -44,5 +45,3 @@ td {
   padding: 9px 8px;
   transition: .3s linear;
 }
-
-

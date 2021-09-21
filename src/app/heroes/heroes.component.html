@@ -10,7 +10,7 @@
 </ng-template>
 
 <div id="search-component">
-  <label for="search-box">Hero Search</label>
+  <label for="search-box">User Search</label>
   <div class="search"> 
     <input #searchBox id="search-box" (input)="search(searchBox.value)" />
   </div>
@@ -18,6 +18,8 @@
       <li *ngFor="let hero of heroes$ | async" >
         <a routerLink="/detail/{{hero.id}}">
           {{hero.name}}
+          {{hero.country}}
+          {{hero.age}}
         </a>
       </li>
     </ul>

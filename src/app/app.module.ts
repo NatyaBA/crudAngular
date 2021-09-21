@@ -2,17 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { HeroesComponent } from './heroes/heroes.component';
-
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { AppRoutingModule } from './app-routing.module';
-
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -57,6 +54,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { BrowserModule } from '@angular/platform-browser';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -109,7 +107,7 @@ import { BrowserModule } from '@angular/platform-browser';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
- 
+
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )
@@ -118,9 +116,8 @@ import { BrowserModule } from '@angular/platform-browser';
         AppComponent,
         HeroesComponent,
         HeroDetailComponent,
-        AddUserComponent
+        AddUserComponent,
     ],
-
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }

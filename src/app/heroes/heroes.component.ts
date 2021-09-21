@@ -4,9 +4,7 @@ import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import {MatSort} from '@angular/material/sort';
 import { Observable, Subject, of } from 'rxjs';
-import {
-  debounceTime, distinctUntilChanged, switchMap
-} from 'rxjs/operators'
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators'
 import { Location } from '@angular/common';
 import { delay } from 'rxjs/operators';
 
@@ -22,31 +20,28 @@ export class HeroesComponent implements OnInit {
   dataSource:any = [];
   heroes$!: Observable<Hero[]>;
   private searchTerms = new Subject<string>();
+
   @ViewChild(MatSort) sort: MatSort;
-
-
 
   constructor(private heroService: HeroService,
     private location: Location){ }
 
-  ngAfterViewInit(): void
-  {
+  ngAfterViewInit(): void { 
     this.heroService.getHeroes().subscribe(heroes => {
       this.dataSource = new MatTableDataSource(heroes);
-      if (this.sort) 
-      {
+      if (this.sort) {
           this.dataSource.sort = this.sort;
       }
     });
   }
+
   ngOnInit() {
-    this.startCounter();  
-    this.getHeroes(); 
     this.heroes$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) => this.heroService.searchHeroes(term)),
-      );
+      switchMap((term: string) => this.heroService.searchHeroesName(term)),
+    );
+
   }
 
   res: Observable<String>;
