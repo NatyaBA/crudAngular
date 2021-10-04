@@ -1,13 +1,3 @@
-<div *ngIf="res | async as msg; else loading">
-  {{msg}}
-</div>
-<ng-template #loading>
-  <mat-progress-bar 
-    mode="determinate" 
-    [value]="determinateCnt" 
-    (animationEnd)="progressInLoading()">
-  </mat-progress-bar>
-</ng-template>
 
 <div>
   <table>

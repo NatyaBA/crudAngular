@@ -19,6 +19,7 @@ export class HeroDetailComponent implements OnInit {
   showMainContent: Boolean = true;
   incorrect: Boolean = true;
   heroes$!: Observable<Hero[]>;
+  userName: Boolean = true;
   private searchTerms = new Subject<string>();
 
   constructor(
@@ -60,7 +61,7 @@ export class HeroDetailComponent implements OnInit {
   goBack(): void {
     const dialogRef = this.dialog.open(ConfirmationDialog,{
       data:{
-        message: 'Are you sure want to delete?',
+        message: 'Are you sure you want to leave page without saving??',
         buttonText: {
           cancel: 'Cancle',
           ok: 'Go back'
@@ -81,7 +82,7 @@ export class HeroDetailComponent implements OnInit {
     this.location.back();
   }
 
-  save (name: string, country: string, age: string): void {
+  save (hero: Hero, name: string, country: string, age: string): void {
     name = name.trim();
     age = age.trim();
     country = country.trim();
@@ -89,22 +90,35 @@ export class HeroDetailComponent implements OnInit {
     if (!name || !age || !country) { 
       this.incorrect = false;
       this.showMainContent = true;
+      this.userName = true;
       return; 
     }
-    else
+    else 
     this.incorrect = true;
-    
-    for (let i=1; i < 101; i++)
-      if (age == String(i)) {
-        this.showMainContent = true;
-          if (this.hero) {
-            this.heroService.updateHero(this.hero)
-            .subscribe(() => this.back());
+        this.heroService.getHeroes().subscribe( heroes => {
+          var nums: string[]= new Array(4);
+          
+          for(let i=0; i<heroes.length; i++) {
+            
+            nums = Object.values(heroes[i])
+            if ((nums[1] == name || nums[2] == name) && i+1 !==hero.id) {
+              this.userName = false;
+             return          
+            }
           }
+          for (let i = 1; i < 101; i++)
+          if (age == String(i)  && (nums[1] !== name || nums[2] !== name)) {
+            this.showMainContent = true;
+            this.userName = true;
+            if (this.hero) {
+              this.heroService.updateHero(this.hero)
+              .subscribe(() => this.back());
+            }
           break;
-      }
-      else {
-        this.showMainContent = false;
-      }
+        }
+        else {
+          this.showMainContent = false;
+        }
+        });
   }
 }

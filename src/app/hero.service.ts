@@ -40,7 +40,9 @@ export class HeroService {
 
   getHero(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
-    return this.http.get<Hero>(url).pipe(
+  
+    return this.http.get<Hero>(url)
+    .pipe(
       tap(_ => this.log(`fetched hero id=${id}`)),
       catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
@@ -69,6 +71,7 @@ export class HeroService {
 
   deleteHero(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
+
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted hero id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))

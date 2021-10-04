@@ -29,7 +29,7 @@
         <td><input id="age" #heroAge type="number" name="tentacles" min="1" max="100" [(ngModel)]="hero.age" placeholder="age"></td>
       </tr>
       <tr>
-        <td><button mat-button (click)="save(heroName.value, heroCountry.value, heroAge.value)">save</button></td>
+        <td><button mat-button (click)="save(hero, heroName.value, heroCountry.value, heroAge.value)">save</button></td>
         <td><button mat-button (click)="goBack()">go back</button></td>
       </tr>
     </table>
@@ -40,6 +40,9 @@
 
     <div *ngIf="!showMainContent" id="ages">
       Age entered incorrectly
+    </div>
+    <div *ngIf="!userName" id="ages">
+      Username already exists
     </div>
   </div>
 </div>

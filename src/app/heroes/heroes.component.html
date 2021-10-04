@@ -1,3 +1,4 @@
+
 <div *ngIf="res | async as msg; else loading">
   {{msg}}
 </div>
@@ -9,21 +10,10 @@
   </mat-progress-bar>
 </ng-template>
 
-<div id="search-component">
-  <label for="search-box">User Search</label>
-  <div class="search"> 
-    <input #searchBox id="search-box" (input)="search(searchBox.value)" />
-  </div>
-    <ul class="search-result">
-      <li *ngFor="let hero of heroes$ | async" >
-        <a routerLink="/detail/{{hero.id}}">
-          {{hero.name}}
-          {{hero.country}}
-          {{hero.age}}
-        </a>
-      </li>
-    </ul>
-</div>
+<mat-form-field>
+  <input (keyup)="applyFilter($event.target.value)" matInput placeholder="User search" >
+</mat-form-field>
+
 
 <div class="headButton" >
   <button routerLink="/addUser">Add user</button>

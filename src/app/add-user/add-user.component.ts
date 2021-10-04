@@ -30,7 +30,6 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit() {
     this.getHeroes(); 
-    this.startCounter();  
     this.heroes$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -38,18 +37,9 @@ export class AddUserComponent implements OnInit {
     );
   }
 
-  res: Observable<String>;
-  determinateCnt = 0;
-  startCounter() {
-    setInterval(() => {
-      this.determinateCnt += 60;
-    }, 100);
-    this.res = of("  ").pipe (delay(2100));
-  }
+
     
-  progressInLoading() {
-    console.log('Determinate mode: '+ this.determinateCnt + '% completed...');
-  }  
+  
 
   getHeroes(): void {
     this.heroService.getHeroes()
@@ -103,7 +93,7 @@ export class AddUserComponent implements OnInit {
     goBack(): void {
       const dialogRef = this.dialog.open(ConfirmationDialog,{
         data:{
-          message: 'Are you sure want to delete?',
+          message: 'Are you sure you want to leave page without saving?',
           buttonText: {
             cancel: 'Cancle',
             ok: 'Go back'
